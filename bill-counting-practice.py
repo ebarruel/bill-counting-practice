@@ -1,4 +1,5 @@
 import random
+import argparse
 
 def total(num_100, num_50, num_20, num_10, num_5, num_1):
     return (100*num_100) + (50*num_50) + (20*num_20) + (10*num_10) + (5*num_5) + num_1
@@ -37,4 +38,12 @@ def bill_counting(num_bills_init):
     print_exercise(num_100, num_50, num_20, num_10, num_5, num_bills, total_amount)
 
 if __name__ == "__main__":
-    bill_counting(32)
+    parser = argparse.ArgumentParser(\
+        description="Generate arbitrary amounts for each dollar denomination for teller practice"\
+    )
+    parser.add_argument("num_bills_init", metavar="N",\
+                        help="number of bills"\
+    )
+    args = parser.parse_args()
+
+    bill_counting(int(args.num_bills_init))
