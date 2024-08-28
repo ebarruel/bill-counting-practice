@@ -8,11 +8,12 @@ def total(num_by_denomination, denominations):
 
     return sum
 
-def print_exercise(num_by_denomination, denominations, total):
+def print_exercise(num_by_denomination, denominations, total, num_bills_used):
     for i in range(len(denominations)):
         print("${}\tx {}".format(denominations[i], num_by_denomination[i]))
 
     print("\nTotal: ${}".format(total))
+    print("    {} bills used".format(num_bills_used))
 
 def bill_counting(num_bills_init):
     num_bills = num_bills_init
@@ -24,11 +25,14 @@ def bill_counting(num_bills_init):
         num_bills -= num_by_denomination[i]
 
     total_amount = total(num_by_denomination, denominations)
-    print_exercise(num_by_denomination, denominations, total_amount)
+    print_exercise(num_by_denomination, denominations,\
+                   total_amount, num_bills_init - num_bills\
+    )
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(\
-        description="Generate arbitrary amounts for each dollar denomination for teller practice"\
+        description="Generate arbitrary amounts for each dollar denomination \
+            for teller practice"\
     )
     parser.add_argument("num_bills_init", metavar="N",\
                         help="number of bills"\
