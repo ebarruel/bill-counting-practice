@@ -1,0 +1,5 @@
+= Bill Counting Practice
+
+Little program for my own personal use as a bank teller.
+
+Run `python3 bill-counting-practice.py -h` for usage help.
