@@ -1,41 +1,30 @@
 import random
 import argparse
 
-def total(num_100, num_50, num_20, num_10, num_5, num_1):
-    return (100*num_100) + (50*num_50) + (20*num_20) + (10*num_10) + (5*num_5) + num_1
+def total(num_by_denomination, denominations):
+    sum = 0
+    for i in range(len(denominations)):
+        sum += denominations[i] * num_by_denomination[i]
 
-def print_exercise(num_100, num_50, num_20, num_10, num_5, num_1, total):
-    print("$100\tx", num_100)
-    print("$50\tx", num_50)
-    print("$20\tx", num_20)
-    print("$10\tx", num_10)
-    print("$5\tx", num_5)
-    print("$1\tx", num_1)
+    return sum
+
+def print_exercise(num_by_denomination, denominations, total):
+    for i in range(len(denominations)):
+        print("${}\tx {}".format(denominations[i], num_by_denomination[i]))
 
     print("\nTotal: ${}".format(total))
 
 def bill_counting(num_bills_init):
     num_bills = num_bills_init
+    denominations = [100, 50, 20, 10, 5, 1]
+    num_by_denomination = [0]*len(denominations)
 
-    num_100 = random.randint(0, num_bills)
-    num_bills -= num_100
+    for i in range(len(denominations)):
+        num_by_denomination[i] = random.randint(0, num_bills)
+        num_bills -= num_by_denomination[i]
 
-    num_50 = random.randint(0, num_bills)
-    num_bills -= num_50
-
-    num_20 = random.randint(0, num_bills)
-    num_bills -= num_20
-
-    num_10 = random.randint(0, num_bills)
-    num_bills -= num_10
-
-    num_5 = random.randint(0, num_bills)
-    num_bills -= num_5
-
-    # num_1 = num_bills
-
-    total_amount = total(num_100, num_50, num_20, num_10, num_5, num_bills)
-    print_exercise(num_100, num_50, num_20, num_10, num_5, num_bills, total_amount)
+    total_amount = total(num_by_denomination, denominations)
+    print_exercise(num_by_denomination, denominations, total_amount)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(\
